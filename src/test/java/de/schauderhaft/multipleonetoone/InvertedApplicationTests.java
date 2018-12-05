@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 
+import static java.util.Arrays.*;
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
@@ -26,22 +27,36 @@ public class InvertedApplicationTests {
 	@Test
 	public void playWithVehicles() {
 
-		Truck truck = createTruck();
+		trucks.save(createTruck("Trucky McTruckload", "Truck Engine"));
 
-		trucks.save(truck);
+		cars.saveAll(asList(
+				createCar("Racer Racy", "Strong engine"),
+				createCar("Snail", "Weak engine"))
+		);
 
 		assertThat(count(Truck.class)).isEqualTo(1);
-		assertThat(count(Engine.class)).isEqualTo(1);
+		assertThat(count(Car.class)).isEqualTo(2);
+		assertThat(count(Engine.class)).isEqualTo(3);
 	}
 
-	private Truck createTruck() {
+	private Truck createTruck(String truckName, String engineName) {
 
 		Truck truck = new Truck();
-		truck.name = "Trucky McTruckload";
+		truck.name = truckName;
 		truck.engine = new Engine();
-		truck.engine.name = "Truck Engine";
+		truck.engine.name = engineName;
 
 		return truck;
+	}
+
+	private Car createCar(String carName, String engineName) {
+
+		Car car = new Car();
+		car.name = carName;
+		car.engine = new Engine();
+		car.engine.name = engineName;
+
+		return car;
 	}
 
 	private Long count(Class<?> type) {
