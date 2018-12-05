@@ -27,6 +27,6 @@ public class Car {
 	Long id;
 	String name;
 
-//	@Column(value = "vehicle")
+	@Column(value = "vehicle")
 	Engine engine;
 }

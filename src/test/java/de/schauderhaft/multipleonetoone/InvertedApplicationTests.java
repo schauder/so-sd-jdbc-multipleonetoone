@@ -29,14 +29,27 @@ public class InvertedApplicationTests {
 
 		trucks.save(createTruck("Trucky McTruckload", "Truck Engine"));
 
+		Car car = createCar("Racer Racy", "Strong engine");
 		cars.saveAll(asList(
-				createCar("Racer Racy", "Strong engine"),
+				car,
 				createCar("Snail", "Weak engine"))
 		);
 
 		assertThat(count(Truck.class)).isEqualTo(1);
 		assertThat(count(Car.class)).isEqualTo(2);
 		assertThat(count(Engine.class)).isEqualTo(3);
+
+		cars.delete(car);
+
+		assertThat(count(Truck.class)).isEqualTo(1);
+		assertThat(count(Car.class)).isEqualTo(1);
+		assertThat(count(Engine.class)).isEqualTo(2);
+
+		trucks.deleteAll();
+
+		assertThat(count(Truck.class)).isEqualTo(0);
+		assertThat(count(Car.class)).isEqualTo(1);
+		assertThat(count(Engine.class)).isEqualTo(1); // <-- this fails!!!!!
 	}
 
 	private Truck createTruck(String truckName, String engineName) {
