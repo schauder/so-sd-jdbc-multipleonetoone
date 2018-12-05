@@ -49,7 +49,7 @@ public class InvertedApplicationTests {
 
 		assertThat(count(Truck.class)).isEqualTo(0);
 		assertThat(count(Car.class)).isEqualTo(1);
-		assertThat(count(Engine.class)).isEqualTo(1); // <-- this fails!!!!!
+		assertThat(count(Engine.class)).isEqualTo(1);
 	}
 
 	private Truck createTruck(String truckName, String engineName) {
