@@ -39,6 +39,9 @@ public class InvertedApplicationTests {
 		assertThat(count(Car.class)).isEqualTo(2);
 		assertThat(count(Engine.class)).isEqualTo(3);
 
+		trucks.findAll();
+
+
 		cars.delete(car);
 
 		assertThat(count(Truck.class)).isEqualTo(1);
